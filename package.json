@@ -1,0 +1,22 @@
+{
+  "name": "SoftEng2ExamAPI",
+  "version": "1.0.0",
+  "description": "API project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverage": true
+  },
+  "author": "Zardini Enrico",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "jest": "^22.0.4",
+    "request": "^2.83.0",
+    "request-promise-native": "^1.0.5"
+  }
+}
