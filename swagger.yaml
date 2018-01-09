@@ -1,0 +1,169 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: "SoftEng2ExamAPI"
+  description: APIs for Software Engeneering 2 Exam.
+  contact:
+    name: ZarHenry96
+host: softeng2exam.herokuapp.com
+basePath: /v1/collection
+schemes:
+  - https
+consumes:
+  - application/x-www-form-urlencoded
+produces:
+  - application/json
+paths:
+  /:
+    get:
+      description: 
+        'Returns the collection of genericObjects.'
+      responses:
+        200:
+          description: array of all genericObjects.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/genericObject'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorSchema'
+    post:
+      description: 
+        'Inserts new genericObject.'
+      parameters:
+        - name: genericObject
+          in: body
+          description: new genericObject
+          required: true
+          schema:
+              $ref: '#/definitions/genericObject'
+      responses:
+          200:
+            description: ok
+            schema:
+              $ref: '#/definitions/responseSchema'  
+          500:
+            description: error
+            schema:
+              $ref: '#/definitions/errorSchema'
+    delete:
+      description: 
+        'Deletes the collection of genericObjects.'
+      responses:
+          200:
+            description: ok
+            schema:
+              $ref: '#/definitions/responseSchema' 
+          500:
+            description: error
+            schema:
+              $ref: '#/definitions/errorSchema'
+              
+  /{id}:
+    get:
+      description: 
+        'Returns the genericObject identified by "id".'
+      parameters:
+        - name: id
+          in: path
+          description: genericObject id
+          required: true
+          type: string
+      responses:
+        200:
+          description: the genericObject identified by "id"
+          schema:
+              $ref: '#/definitions/genericObject'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorSchema'
+    put:
+      description: 
+        'Updates the genericObject identified by "id".'
+      parameters:
+        - name: id
+          in: path
+          description: genericObject id
+          required: true
+          type: string
+      responses:
+          200:
+            description: ok
+            schema:
+              $ref: '#/definitions/updatedGenericObject'
+          500:
+            description: error
+            schema:
+              $ref: '#/definitions/errorSchema'
+    delete:
+      description: 
+        'Deletes the genericObject identified by "id".'
+      parameters:
+        - name: id
+          in: path
+          description: genericObject id
+          required: true
+          type: string
+      responses:
+          200:
+            description: ok
+            schema:
+              $ref: '#/definitions/responseSchema'
+          500:
+            description: error
+            schema:
+              $ref: '#/definitions/errorSchema'
+              
+              
+definitions:
+        
+  genericObject: 
+    required: 
+      - id
+      - field1
+      - field2
+      - field3
+    properties:
+      id:
+        type: string
+        description: genericObject id
+      field1:
+        type: string
+      field2:
+        type: string
+      field3:
+        type: string
+        
+  updatedGenericObject:
+    required:
+      - field1
+      - field2
+      - field3
+    properties:
+      field1:
+        type: string
+      field2:
+        type: string
+      field3:
+        type: string
+  
+  responseSchema:
+    required:
+      - message
+    properties:
+      message:
+        type: string  
+    
+  errorSchema:
+    required:
+      - error
+    properties:
+      error:
+        required:
+          - message
+        properties:
+          message:
+            type: string
